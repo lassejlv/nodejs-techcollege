@@ -1,19 +1,18 @@
-import "dotenv/config";
-import * as http from "http";
-import { PrettyResponse, Router } from "./Router";
+import express from "express";
+import morgan from "morgan";
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5001;
 
-// prettier-ignore
-http.createServer((req, res) => {
-  const router = Router(req, res);
+const app = express();
 
-  router.get("/", (req, res) => {
-    PrettyResponse(res).json({ message: "Yes, it does!" });
-  })
+// Middleware
+app.use(morgan("dev"));
+app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
 
-}).listen(PORT, () => {
-  console.log(`Started server on http://localhost:${PORT}`);
-  
-})
+app.listen(PORT, () => {
+  console.log(`Started server on port http://localhost:${PORT}`);
+});
