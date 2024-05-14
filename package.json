@@ -13,7 +13,11 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.43.1",
+    "@t3-oss/env-core": "^0.10.1",
     "express": "^4.19.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "supabase": "^1.165.0",
+    "zod": "^3.23.8"
   }
 }

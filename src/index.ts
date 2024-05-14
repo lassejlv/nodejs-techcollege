@@ -1,7 +1,8 @@
 import express from "express";
 import morgan from "morgan";
+import { env } from "./env";
 
-const PORT = process.env.PORT || 5001;
+const PORT = env.PORT;
 
 const app = express();
 
