@@ -18,6 +18,7 @@
     "express": "^4.19.2",
     "morgan": "^1.10.0",
     "supabase": "^1.165.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zod-express-middleware": "^1.4.0"
   }
 }

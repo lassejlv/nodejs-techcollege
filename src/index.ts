@@ -1,7 +1,8 @@
 import express from "express";
 import morgan from "morgan";
-import { env } from "./env";
-import { supabase } from "./supabase";
+import { env } from "@/util/env";
+import { supabase } from "@/util/supabase";
+import SongsRouter from "@/routes/songs";
 
 const PORT = env.PORT;
 
@@ -27,17 +28,7 @@ app.get("/", (req, res) => {
   );
 });
 
-app.get("/songs", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("Songs").select("*");
-
-    if (error) return res.status(400).send({ error });
-
-    res.send(data);
-  } catch (error) {
-    res.status(400).send({ error });
-  }
-});
+app.use("/songs", SongsRouter);
 
 app.get("/artists", async (req, res) => {
   try {
