@@ -5,3 +5,5 @@ export const SongSchema = z.object({
   content: z.string(),
   artist_id: z.string(),
 });
+
+export type Song = z.infer<typeof SongSchema>;
