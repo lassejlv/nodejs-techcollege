@@ -1,8 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import { env } from "@/util/env";
-import { supabase } from "@/util/supabase";
 import SongsRouter from "@/routes/songs";
+import ArtistsRouter from "@/routes/artists";
+import AlbumsRouter from "@/routes/albums";
 
 const PORT = env.PORT;
 
@@ -30,29 +31,9 @@ app.get("/", (req, res) => {
 
 app.use("/songs", SongsRouter);
 
-app.get("/artists", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("Artist").select("*");
+app.use("/artists", ArtistsRouter);
 
-    if (error) return res.status(400).send({ error });
-
-    res.send(data);
-  } catch (error) {
-    res.status(400).send({ error });
-  }
-});
-
-app.get("/albums", async (req, res) => {
-  try {
-    const { data, error } = await supabase.from("Albums").select("*");
-
-    if (error) return res.status(400).send({ error });
-
-    res.send(data);
-  } catch (error) {
-    res.status(400).send({ error });
-  }
-});
+app.use("/albums", AlbumsRouter);
 
 app.listen(PORT, () => {
   console.log(`Started server on port http://localhost:${PORT}`);

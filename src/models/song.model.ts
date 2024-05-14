@@ -3,9 +3,10 @@ import type { Song } from "@/util/zod";
 
 export class SongModel {
   static async all(limit?: number) {
+    // we will to return artist name out from the artist id
     const { data, error } = await supabase
       .from("Songs")
-      .select("*")
+      .select("id,title,content,artist:artist_id ( id, name )")
       .limit(limit ?? 500);
 
     if (error) throw new Error(error.message);
