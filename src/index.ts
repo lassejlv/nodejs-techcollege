@@ -12,18 +12,57 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("My express app is running!");
+  // Get all the available routes
+  const routes = app._router.stack as { route: { path: string; methods: Record<string, boolean> } }[];
+
+  res.send(
+    routes
+      .filter((route) => route.route)
+      .map((route) => {
+        return {
+          path: route.route?.path,
+          methods: route.route?.methods,
+        };
+      })
+  );
 });
 
 app.get("/songs", async (req, res) => {
-  const songs = await supabase
-    .from("Songs")
-    .select("title, id")
-    .eq("id", "d7423a73-b0e9-4277-8235-bc272547db75")
-    .single();
+  try {
+    const { data, error } = await supabase.from("Songs").select("*");
 
-  res.send(songs);
+    if (error) return res.status(400).send({ error });
+
+    res.send(data);
+  } catch (error) {
+    res.status(400).send({ error });
+  }
 });
+
+app.get("/artists", async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("Artist").select("*");
+
+    if (error) return res.status(400).send({ error });
+
+    res.send(data);
+  } catch (error) {
+    res.status(400).send({ error });
+  }
+});
+
+app.get("/albums", async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("Albums").select("*");
+
+    if (error) return res.status(400).send({ error });
+
+    res.send(data);
+  } catch (error) {
+    res.status(400).send({ error });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Started server on port http://localhost:${PORT}`);
 });
