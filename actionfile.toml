@@ -1,0 +1,9 @@
+[env]
+path = ".env"
+
+[dev]
+cmd = "action types && bun --watch src/index.ts"
+silent = true
+
+[types]
+cmd = "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/database.ts"
