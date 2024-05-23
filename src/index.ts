@@ -1,9 +1,9 @@
 import express from "express";
 import morgan from "morgan";
-import { env } from "@/util/env";
 import SongsRouter from "@/routes/songs";
 import ArtistsRouter from "@/routes/artists";
 import AlbumsRouter from "@/routes/albums";
+import { env } from "@/util/env";
 
 const PORT = env.PORT;
 
@@ -14,19 +14,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  // Get all the available routes
-  const routes = app._router.stack as { route: { path: string; methods: Record<string, boolean> } }[];
-
-  res.send(
-    routes
-      .filter((route) => route.route)
-      .map((route) => {
-        return {
-          path: route.route?.path,
-          methods: route.route?.methods,
-        };
-      })
-  );
+  res.json({ hello: "world" });
 });
 
 app.use("/songs", SongsRouter);

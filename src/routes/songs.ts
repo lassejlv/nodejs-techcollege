@@ -26,6 +26,17 @@ router.post("/", validateRequestBody(SongSchema), async (req, res) => {
   }
 });
 
+router.put("/:songId", validateRequestBody(SongSchema), async (req, res) => {
+  try {
+    const id = req.params.songId;
+    const data = await SongModel.update(id, req.body);
+
+    res.send({ data });
+  } catch (error: any) {
+    Failure(error.message, res);
+  }
+});
+
 router.get("/:songId", async (req, res) => {
   try {
     const id = req.params.songId;

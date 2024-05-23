@@ -41,4 +41,21 @@ export class SongModel {
 
     return data;
   }
+
+  static async update(id: string, song: Song) {
+    const { data, error } = await supabase
+      .from("Songs")
+      .update({
+        title: song.title,
+        content: song.content,
+        artist_id: song.artist_id,
+      })
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+
+    return data;
+  }
 }
