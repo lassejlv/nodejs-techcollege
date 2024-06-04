@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/cors": "^2.8.17",
     "@types/morgan": "^1.9.9"
   },
   "peerDependencies": {
@@ -15,6 +16,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
     "@t3-oss/env-core": "^0.10.1",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
     "supabase": "^1.165.0",
