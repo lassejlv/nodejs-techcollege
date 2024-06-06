@@ -14,7 +14,11 @@ export class SongModel {
   }
 
   static async single(id: string) {
-    const { data, error } = await supabase.from("Songs").select().eq("id", id).single();
+    const { data, error } = await supabase
+      .from("Songs")
+      .select("id,title,content,artist:artist_id ( id, name )")
+      .eq("id", id)
+      .single();
     if (error) throw new Error(error.message);
     else return data;
   }

@@ -14,4 +14,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const song = await ArtistsModel.single(req.params.id);
+
+    res.send(song);
+  } catch (error: any) {
+    Failure(error.message, res);
+  }
+});
+
 export default router;
