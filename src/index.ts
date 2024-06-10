@@ -11,7 +11,7 @@ const PORT = env.PORT;
 const app = express();
 
 // Middleware
-app.use(morgan("dev"));
+app.use(morgan("tiny"));
 app.use(
   cors({
     origin: "*",

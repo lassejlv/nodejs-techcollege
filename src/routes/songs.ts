@@ -42,7 +42,7 @@ router.get("/:songId", async (req, res) => {
     const id = req.params.songId;
     const data = await SongModel.single(id);
 
-    res.send({ data });
+    res.send(data);
   } catch (error: any) {
     Failure(error.message, res);
   }
@@ -55,7 +55,7 @@ router.delete("/:songId", async (req, res) => {
 
     res.send({ data });
   } catch (error: any) {
-    Failure(error.message, res);
+    Failure(error.message, res, 400);
   }
 });
 
